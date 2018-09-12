@@ -1,2 +1,29 @@
 # knowledge
 知识汇总
+
+项目组成
+1. id-generator 基于Twitter-Snowflake生产的id生成器
+2. shiroweb基于shiro框架的简单实现
+3. 未完待续...
+
+## id-generator
+
+> [snowflake项目地址](https://github.com/twitter/snowflake)
+
+### id组成形式
+
+预留|时间（精确到毫秒）|数据中心id|机器id|序列值
+--|--|--|--|--
+1位|41位|5位|5位|12位
+
+### 使用方法
+
+在spring-web.xml中配置datacenterId和workerId即可用注入的方式使用。
+
+### 启动方式
+
+打开 test/java/StartServer.java文件，运行main方法，通过访问[获取id](http://localhost:9999/id-generator/id/getId.do)方式即可。
+
+## shiroweb
+
+该项目待补充，计划编写shiro中内置基础方法。
