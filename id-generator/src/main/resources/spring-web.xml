@@ -27,12 +27,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <bean id="idGenerator" class="cn.i7baoz.www.generator.impl.DefaultIdGenerator">
+    <bean id="idGenerator" class="cn.i7baoz.generator.impl.DefaultIdGenerator">
         <constructor-arg name="datacenterId" value="2"/>
         <constructor-arg name="workerId" value="2"/>
     </bean>
 
     <!-- 设置使用注解的类所在的jar包 -->
-    <context:component-scan base-package="cn.i7baoz.www"/>
+    <context:component-scan base-package="cn.i7baoz"/>
 
 </beans>

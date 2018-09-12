@@ -1,10 +1,9 @@
-package cn.i7baoz.www.generator;
+package cn.i7baoz.generator;
 
-import cn.i7baoz.www.config.GeneratorConfig;
+import cn.i7baoz.config.GeneratorConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * @Title:

@@ -1,10 +1,7 @@
-package cn.i7baoz.www.generator.impl;
+package cn.i7baoz.generator.impl;
 
-import cn.i7baoz.www.config.GeneratorConfig;
-import cn.i7baoz.www.generator.AbstractIdGenerator;
+import cn.i7baoz.generator.AbstractIdGenerator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 
 /**
  * @Title:

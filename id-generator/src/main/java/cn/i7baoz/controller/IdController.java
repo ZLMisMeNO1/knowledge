@@ -1,7 +1,7 @@
-package cn.i7baoz.www.controller;
+package cn.i7baoz.controller;
 
-import cn.i7baoz.www.config.GeneratorConfig;
-import cn.i7baoz.www.generator.impl.DefaultIdGenerator;
+import cn.i7baoz.config.GeneratorConfig;
+import cn.i7baoz.generator.impl.DefaultIdGenerator;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
