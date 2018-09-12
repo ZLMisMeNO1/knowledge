@@ -1,6 +1,6 @@
 package cn.i7baoz.knowledge.controller;
 
-import cn.i7baoz.config.GeneratorConfig;
+import cn.i7baoz.knowledge.config.GeneratorConfig;
 import cn.i7baoz.knowledge.generator.impl.DefaultIdGenerator;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;

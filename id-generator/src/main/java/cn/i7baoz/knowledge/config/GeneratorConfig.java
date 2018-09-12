@@ -1,4 +1,4 @@
-package cn.i7baoz.config;
+package cn.i7baoz.knowledge.config;
 
 import lombok.Builder;
 import lombok.Data;

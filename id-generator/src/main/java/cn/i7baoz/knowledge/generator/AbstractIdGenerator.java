@@ -1,6 +1,6 @@
-package cn.i7baoz.generator;
+package cn.i7baoz.knowledge.generator;
 
-import cn.i7baoz.config.GeneratorConfig;
+import cn.i7baoz.knowledge.config.GeneratorConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Timestamp;
