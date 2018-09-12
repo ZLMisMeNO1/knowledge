@@ -7,7 +7,7 @@ public class StartServer {
 
     public static void main(String[] args) {
         // 服务器的监听端口
-        Server server = new Server(9999);
+        Server server = new Server(8001);
         // 关联一个已经存在的上下文
         WebAppContext context = new WebAppContext();
         // 设置描述符位置
@@ -22,11 +22,9 @@ public class StartServer {
 
         try {
             server.start();
-            log.info("server start");
+            log.info("获取单个id和该id的解析 : http://localhost:8001/id-generator/id/getId");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("server is  start");
     }
 }

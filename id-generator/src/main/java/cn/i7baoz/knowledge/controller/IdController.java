@@ -1,7 +1,7 @@
-package cn.i7baoz.controller;
+package cn.i7baoz.knowledge.controller;
 
 import cn.i7baoz.config.GeneratorConfig;
-import cn.i7baoz.generator.impl.DefaultIdGenerator;
+import cn.i7baoz.knowledge.generator.impl.DefaultIdGenerator;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class IdController {
     @Autowired
     private DefaultIdGenerator defaultIdGenerator;
 
-    @RequestMapping("/getId.do")
+    @RequestMapping("/getId")
     public Map<String,String> getId() {
         Map<String,String> map = Maps.newHashMap();
         long id  = defaultIdGenerator.generateId();

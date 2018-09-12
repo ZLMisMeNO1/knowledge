@@ -22,8 +22,14 @@
 
 ### 启动方式
 
-打开 test/java/StartServer.java文件，运行main方法，通过访问[获取id](http://localhost:9999/id-generator/id/getId.do)方式即可。
+打开 test/java/StartServer.java文件，运行main方法，通过访问[获取id](http://localhost:8001/id-generator/id/getId)方式即可。
 
 ## shiroweb
+
+### 项目使用技术/框架
+1. spring
+2. spring-mvc
+3. mybatis
+4. mysql
 
 该项目待补充，计划编写shiro中内置基础方法。

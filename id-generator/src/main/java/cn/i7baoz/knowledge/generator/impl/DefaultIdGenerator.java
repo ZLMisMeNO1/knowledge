@@ -1,4 +1,4 @@
-package cn.i7baoz.generator.impl;
+package cn.i7baoz.knowledge.generator.impl;
 
 import cn.i7baoz.generator.AbstractIdGenerator;
 import lombok.extern.slf4j.Slf4j;
