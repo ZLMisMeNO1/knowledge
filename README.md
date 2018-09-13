@@ -2,7 +2,9 @@
 知识汇总
 
 项目组成
-1. id-generator 基于Twitter-Snowflake算法id生成器简单实现
+1. id-generator
+    - [DefaultIdGeneratorImpl](cn.i7baoz.knowledge.service.impl.DefaultIdGeneratorImpl)基于Twitter-Snowflake算法id生成器简单实现
+    - [CacheIdGeneratorImpl](cn.i7baoz.knowledge.service.impl.CacheIdGeneratorImpl)基于redisid（EVAL，EVALSHA命令）生成器，待补充
 2. shiroweb基于shiro框架的简单实现
 3. 未完待续...
 
