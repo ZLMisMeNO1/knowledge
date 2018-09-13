@@ -1,26 +1,63 @@
-package cn.i7baoz.knowledge.generator;
+package cn.i7baoz.knowledge.service.impl;
 
 import cn.i7baoz.knowledge.config.GeneratorConfig;
+import cn.i7baoz.knowledge.service.IdGeneratorService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
 /**
  * @Title:
  * @Package
- * @Description: 组成id方式 0- 41位时间戳 - 5位数据中心-5位机器id-12位序列
+ * @Description:
  * @author: baoqi.zhang
  * @date:
  */
 @Slf4j
-public abstract class AbstractIdGenerator {
+@Service
+public class DefaultIdGeneratorImpl implements IdGeneratorService {
 
+    /**
+     * 数据中心id
+     */
+    @Value("${workerId}")
+    private Long datacenterId;
+
+    /**
+     * 机器id
+     */
+    @Value("${datacenterId}")
+    private Long workerId;
+
+    public DefaultIdGeneratorImpl() {
+    }
+
+    public DefaultIdGeneratorImpl(Long datacenterId, Long workerId) {
+
+        this.datacenterId = datacenterId;
+        this.workerId = workerId;
+    }
+
+    /**
+     * 序列占位数
+     */
     private long sequenceBits = 12L;
 
+    /**
+     * 数据中心占位数
+     */
     private long datacenterIdBits = 5L;
 
+    /**
+     * 机器id占位数
+     */
     private long workerIdBits = 5L;
 
+    /**
+     * 时间占位数
+     */
     private long timeBits = 41L;
     /**
      * 序列偏移位置
@@ -63,11 +100,6 @@ public abstract class AbstractIdGenerator {
      */
     private Long sequence = 0L;
 
-    /**
-     * 开始时间 2018-01-01 00:00:00
-     */
-    private long startTime = 1514736000000L;
-
     protected synchronized Long nextId(Long datacenterId, Long workerId) {
 
         if (workerId == null || workerId > maxWorkerId || workerId < 0) {
@@ -95,7 +127,7 @@ public abstract class AbstractIdGenerator {
 
         return sequence
                 | (workerId << workerShift)
-                | (datacenterId << datacenterShift )
+                | (datacenterId << datacenterShift)
                 | (((time - startTime) << timeShift));
     }
 
@@ -121,30 +153,38 @@ public abstract class AbstractIdGenerator {
         return time;
     }
 
-    /**
-     * 生产id
-     *
-     * @return id
-     */
-    protected abstract Long generateId();
+    @Override
+    public Long generateId() {
+        return nextId(datacenterId,workerId);
+    }
 
-    /**
-     * 解析id
-     *
-     * @param id 生产的id
-     * @return
-     */
+    @Override
     public GeneratorConfig parseId(Long id) {
-        if (id == null || id < startTime ) {
+        if (id == null || id < startTime) {
             log.error("id is null or id is invalid ");
             throw new IllegalArgumentException("id is null or id is invalid ");
         }
         GeneratorConfig.GeneratorConfigBuilder builder = GeneratorConfig.builder();
-        builder.sequence( (id >> sequenceShift ) & ( (1L << sequenceBits ) - 1 ))
-                .workerId((id >> workerShift) & ( (1L << workerIdBits) -1 ))
-                .datacenterId( id >> datacenterShift & ((1L << datacenterIdBits) -1 ))
-                .time(new Timestamp((id >> timeShift & ((1L << timeBits) -1 ))));
+        builder.sequence((id >> sequenceShift) & ((1L << sequenceBits) - 1))
+                .workerId((id >> workerShift) & ((1L << workerIdBits) - 1))
+                .datacenterId(id >> datacenterShift & ((1L << datacenterIdBits) - 1))
+                .time(new Timestamp((id >> timeShift & ((1L << timeBits) - 1))));
         return builder.build();
     }
 
+    public Long getDatacenterId() {
+        return datacenterId;
+    }
+
+    public void setDatacenterId(Long datacenterId) {
+        this.datacenterId = datacenterId;
+    }
+
+    public Long getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(Long workerId) {
+        this.workerId = workerId;
+    }
 }
