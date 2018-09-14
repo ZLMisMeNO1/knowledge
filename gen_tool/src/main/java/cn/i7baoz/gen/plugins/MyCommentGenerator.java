@@ -1,11 +1,15 @@
-package org.mybatis.generator;
+package cn.i7baoz.gen.plugins;
+
+/** 注释
+ * @author ZHANGBAOQI532
+ * @date 2018/9/14
+ **/
 
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -14,7 +18,8 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.PropertyRegistry;
 
-public class MyCommentGenerator implements CommentGenerator{
+public class MyCommentGenerator implements CommentGenerator {
+
     private Properties properties;
     private Properties systemPro;
     private boolean suppressDate;
@@ -29,6 +34,7 @@ public class MyCommentGenerator implements CommentGenerator{
         suppressAllComments = false;
         currentDateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
     }
+
     @Override
     public void addJavaFileComment(CompilationUnit compilationUnit) {
         // add no file level comments by default
@@ -43,11 +49,13 @@ public class MyCommentGenerator implements CommentGenerator{
     public void addComment(XmlElement xmlElement) {
         return;
     }
+
     @Override
     public void addRootComment(XmlElement rootElement) {
         // add no document level comments by default
         return;
     }
+
     @Override
     public void addConfigurationProperties(Properties properties) {
         this.properties.putAll(properties);
@@ -63,8 +71,7 @@ public class MyCommentGenerator implements CommentGenerator{
      * Javadoc tag then the Java merge capability of the eclipse plugin will
      * break.
      *
-     * @param javaElement
-     *            the java element
+     * @param javaElement the java element
      */
     protected void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
         javaElement.addJavaDocLine(" *");
@@ -96,6 +103,7 @@ public class MyCommentGenerator implements CommentGenerator{
         }
         return result;
     }
+
     @Override
     public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable) {
         if (suppressAllComments) {
@@ -110,6 +118,7 @@ public class MyCommentGenerator implements CommentGenerator{
         innerClass.addJavaDocLine(sb.toString().replace("\n", " "));
         innerClass.addJavaDocLine(" */");
     }
+
     @Override
     public void addEnumComment(InnerEnum innerEnum, IntrospectedTable introspectedTable) {
         if (suppressAllComments) {
@@ -122,9 +131,10 @@ public class MyCommentGenerator implements CommentGenerator{
         innerEnum.addJavaDocLine(sb.toString().replace("\n", " "));
         innerEnum.addJavaDocLine(" */");
     }
+
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable,
-                                IntrospectedColumn introspectedColumn) {
+            IntrospectedColumn introspectedColumn) {
         if (suppressAllComments) {
             return;
         }
@@ -135,6 +145,7 @@ public class MyCommentGenerator implements CommentGenerator{
         field.addJavaDocLine(sb.toString().replace("\n", " "));
         field.addJavaDocLine(" */");
     }
+
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable) {
         if (suppressAllComments) {
@@ -149,11 +160,6 @@ public class MyCommentGenerator implements CommentGenerator{
     }
 
     @Override
-    public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-
-    }
-
-    @Override
     public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
         if (suppressAllComments) {
             return;
@@ -162,9 +168,10 @@ public class MyCommentGenerator implements CommentGenerator{
         addJavadocTag(method, false);
         method.addJavaDocLine(" */");
     }
+
     @Override
     public void addGetterComment(Method method, IntrospectedTable introspectedTable,
-                                 IntrospectedColumn introspectedColumn) {
+            IntrospectedColumn introspectedColumn) {
         if (suppressAllComments) {
             return;
         }
@@ -181,9 +188,10 @@ public class MyCommentGenerator implements CommentGenerator{
         method.addJavaDocLine(sb.toString().replace("\n", " "));
         method.addJavaDocLine(" */");
     }
+
     @Override
     public void addSetterComment(Method method, IntrospectedTable introspectedTable,
-                                 IntrospectedColumn introspectedColumn) {
+            IntrospectedColumn introspectedColumn) {
         if (suppressAllComments) {
             return;
         }
@@ -201,6 +209,7 @@ public class MyCommentGenerator implements CommentGenerator{
         method.addJavaDocLine(sb.toString().replace("\n", " "));
         method.addJavaDocLine(" */");
     }
+
     @Override
     public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete) {
         if (suppressAllComments) {

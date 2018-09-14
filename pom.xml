@@ -11,7 +11,7 @@
     <modules>
         <module>shiroweb</module>
         <module>id-generator</module>
-
+        <module>gen_tool</module>
     </modules>
 
     <name>knowledge</name>

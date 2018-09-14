@@ -1,8 +1,9 @@
-package cn.i7baoz.model.bean;
+package cn.i7baoz.model.standard;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RoleBean {
+public class RoleBean implements Serializable {
     /**
      * id
      */
@@ -16,7 +17,7 @@ public class RoleBean {
     /**
      * 
      */
-    private Byte isDel;
+    private Integer isDel;
 
     /**
      * 创建人
@@ -37,6 +38,11 @@ public class RoleBean {
      * 更新时间
      */
     private Date updatedDate;
+
+    /**
+     * shiro_role
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * id
@@ -74,7 +80,7 @@ public class RoleBean {
      * 
      * @return is_del 
      */
-    public Byte getIsDel() {
+    public Integer getIsDel() {
         return isDel;
     }
 
@@ -82,7 +88,7 @@ public class RoleBean {
      * 
      * @param isDel 
      */
-    public void setIsDel(Byte isDel) {
+    public void setIsDel(Integer isDel) {
         this.isDel = isDel;
     }
 

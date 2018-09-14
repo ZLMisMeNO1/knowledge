@@ -1,8 +1,9 @@
-package cn.i7baoz.model.bean;
+package cn.i7baoz.model.standard;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserBean {
+public class UserBean implements Serializable {
     /**
      * id
      */
@@ -26,7 +27,7 @@ public class UserBean {
     /**
      * 
      */
-    private Byte isDel;
+    private Integer isDel;
 
     /**
      * 创建人
@@ -47,6 +48,11 @@ public class UserBean {
      * 更新时间
      */
     private Date updatedDate;
+
+    /**
+     * shiro_user
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * id
@@ -116,7 +122,7 @@ public class UserBean {
      * 
      * @return is_del 
      */
-    public Byte getIsDel() {
+    public Integer getIsDel() {
         return isDel;
     }
 
@@ -124,7 +130,7 @@ public class UserBean {
      * 
      * @param isDel 
      */
-    public void setIsDel(Byte isDel) {
+    public void setIsDel(Integer isDel) {
         this.isDel = isDel;
     }
 
