@@ -6,7 +6,8 @@
     - [DefaultIdGeneratorImpl](https://github.com/ZLMisMeNO1/knowledge/blob/master/id-generator/src/main/java/cn/i7baoz/knowledge/service/impl/DefaultIdGeneratorImpl.java)基于Twitter-Snowflake算法id生成器简单实现
     - [CacheIdGeneratorImpl](https://github.com/ZLMisMeNO1/knowledge/blob/master/id-generator/src/main/java/cn/i7baoz/knowledge/service/impl/CacheIdGeneratorImpl.java)基于redisid（EVAL，EVALSHA命令）生成器，待补充
 2. shiroweb基于shiro框架的简单实现
-3. 未完待续...
+3. gen_tool基于mybatis-generator的简单扩展
+4. 未完待续...
 
 ## id-generator
 
@@ -25,6 +26,16 @@
 ### 启动方式
 
 打开 test/java/StartServer.java文件，运行main方法，通过访问[获取id](http://localhost:8001/id-generator/id/getId)方式即可。
+
+## gen_tool
+
+1. 基于mybatis-generator的简单扩展
+2. 扩展内容为
+    - 修改tinyint类型转为Integer
+    - 优化注释内容
+    - 新增enableBatchInsert批量新增实现
+    - 新增enableBatchUpdateChanged批量更新实现
+3. 更多实现自定义扩展可查看[扩展与使用说明](https://github.com/ZLMisMeNO1/knowledge/blob/master/gen_tool/%E6%89%A9%E5%B1%95%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md)
 
 ## shiroweb
 
