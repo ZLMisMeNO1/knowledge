@@ -16,7 +16,6 @@
         <module>shiro-dao</module>
         <module>shiro-service</module>
         <module>shiro-model</module>
-        <module>gen-tool</module>
     </modules>
     <packaging>pom</packaging>
 
