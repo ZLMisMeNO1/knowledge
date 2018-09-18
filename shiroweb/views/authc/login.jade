@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    div.layui-container
+        div.layui-row
+            div.layui-col-md3
+            div.layui-col-md6.layui-col-md-offset3(style="padding:20px;border:1px solid;margin-top:100px;")
+                div.layui-form
+                    div.layui-form-item
+                        label.layui-form-label 用户名
+                        div.layui-input-inline
+                            input(type="text", name="",lay-verify="required",placeholder="请输入用户名" autocomplete="off" class="layui-input")#username
+                        div.layui-form-mid.layui-word-aux 登录名 *
+                    div.layui-form-item
+                        label.layui-form-label 密码
+                        div.layui-input-inline
+                            input(type="password", name="",lay-verify="required",placeholder="请输入密码" autocomplete="off" class="layui-input")#password
+                        div.layui-form-mid.layui-word-aux 密码 *
+                    div.layui-form-item
+                        label.layui-form-label 记住我
+                        div.layui-input-inline
+                            input(type="checkbox", name="switch",lay-skin="switch")#remerberme
+                    div.layui-form-item
+                        div.layui-input-inline
+                            button.layui-btn 立即提交
+                            button.layui-btn.layui-btn-primary(type="reset") 重置
+            div.layui-col-md3

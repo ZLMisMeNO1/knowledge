@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    script(type="text/javascript",src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js")
+    script(type="text/javascript",src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/plugins/layui-v2.4.3/layui/layui.js")
+    link(rel='stylesheet',href='/plugins/layui-v2.4.3/layui/css/layui.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+    script(type="text/javascript",src="/javascripts/layout.js")
+  body.layui-layout-body
+    div.layui-layout.layui-layout-admin
+      div.layui-header 
+        div.layui-logo shiroweb后台管理
+        ul.layui-nav.layui-layout-left
+          li.layui-nav-item
+            a(href="javascript:;") 人员管理
+          li.layui-nav-item
+            a(href="javascript:;") 角色管理
+          li.layui-nav-item
+            a(href="javascript:;") 权限管理
+        ul.layui-nav.layui-layout-right
+          li.layui-nav-item
+            a(href="javascript:;") 请登录
+    block content
+
