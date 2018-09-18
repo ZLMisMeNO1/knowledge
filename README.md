@@ -37,7 +37,7 @@
     - 新增enableBatchUpdateChanged批量更新实现
 3. 更多实现自定义扩展可查看[扩展与使用说明](https://github.com/ZLMisMeNO1/knowledge/blob/master/gen_tool/%E6%89%A9%E5%B1%95%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md)
 
-## shiroweb
+## shirocore
 
 ### 项目使用技术/框架
 1. spring
@@ -46,3 +46,11 @@
 4. mysql
 
 该项目待补充，计划编写shiro中内置基础方法。
+
+## shiroweb
+基于shirocore的html页面
+### 项目使用技术/框架
+1. nodejs
+2. express
+3. 使用Nginx作为反向代理
+
