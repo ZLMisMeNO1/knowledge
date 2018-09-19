@@ -1,6 +1,7 @@
 extends ../layout
 
 block content
+    script(src="/javascripts/authc/login.js")
     div.layui-container
         div.layui-row
             div.layui-col-md3
@@ -22,6 +23,6 @@ block content
                             input(type="checkbox", name="switch",lay-skin="switch")#remerberme
                     div.layui-form-item
                         div.layui-input-inline
-                            button.layui-btn 立即提交
+                            button.layui-btn#tologin 立即提交
                             button.layui-btn.layui-btn-primary(type="reset") 重置
             div.layui-col-md3

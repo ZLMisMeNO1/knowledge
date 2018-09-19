@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date:
  */
 @RestController
-@RequestMapping("test")
+@RequestMapping("/s/test")
 public class TestController {
 
     @RequestMapping("index")

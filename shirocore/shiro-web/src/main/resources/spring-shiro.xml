@@ -23,6 +23,7 @@
         <property name="successUrl" value="${shiro.successUrl"/>
         <property name="filterChainDefinitions">
             <value>
+                /s/authc/toLogin = anon
                 /** = authc
             </value>
         </property>
@@ -32,5 +33,5 @@
     <util:list id="realms">
         <ref bean="usernamePasswordRealm"/>
     </util:list>
-    <bean id="usernamePasswordRealm" class="cn.i7baoz.knowledge.shiro.UsernamePasswordRealm"/>
+    <bean id="usernamePasswordRealm" class="cn.i7baoz.knowledge.shiro.realms.UsernamePasswordRealm"/>
 </beans>

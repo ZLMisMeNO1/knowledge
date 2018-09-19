@@ -13,15 +13,15 @@ public class StartServer {
     // 设置描述符位置
         context.setDescriptor("./shirocore/shiro-web/src/main/webapp/WEB-INF/web.xml");
     // 设置Web内容上下文路径
-        context.setResourceBase("./shirocore/shiro-web/src/main/webapp");
+        context.setResourceBase("./shiro-web/src/main/webapp");
     // 设置上下文路径
-        context.setContextPath("/shirocore");
+        context.setContextPath("/");
         context.setParentLoaderPriority(true);
         server.setHandler(context);
 
         try {
         server.start();
-        log.info("地址 -> http://localhost:8002/shirocore");
+        log.info("地址 -> http://localhost:8002/");
     } catch (Exception e) {
         e.printStackTrace();
     }
