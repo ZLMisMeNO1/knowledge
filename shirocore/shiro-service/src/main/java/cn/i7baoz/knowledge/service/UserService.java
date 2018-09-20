@@ -1,6 +1,7 @@
 package cn.i7baoz.knowledge.service;
 
-import cn.i7baoz.model.standard.UserBean;
+import cn.i7baoz.knowledge.model.dto.LoginUserPersonDto;
+import cn.i7baoz.knowledge.model.standard.UserBean;
 
 /**
  * @Title:
@@ -12,9 +13,9 @@ import cn.i7baoz.model.standard.UserBean;
 public interface UserService {
 
     /**
-     * 获取用户
-     * @param id
+     * 获取人员的信息
+     * @param code
      * @return
      */
-    UserBean getUserById(Long id);
+    LoginUserPersonDto getPersonDetail(String code);
 }

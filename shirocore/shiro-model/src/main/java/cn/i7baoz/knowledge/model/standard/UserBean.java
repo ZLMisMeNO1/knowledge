@@ -1,21 +1,26 @@
-package cn.i7baoz.model.standard;
+package cn.i7baoz.knowledge.model.standard;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class RoleBean implements Serializable {
+public class UserBean implements Serializable {
     /**
      * id
      */
     private Long id;
 
     /**
-     * 角色名称
+     * 用户密码
      */
-    private String name;
+    private String passwordHash;
 
     /**
-     * 
+     * 密码盐
+     */
+    private String salt;
+
+    /**
+     * 是否删除 1：删除
      */
     private Integer isDel;
 
@@ -40,7 +45,7 @@ public class RoleBean implements Serializable {
     private Date updatedDate;
 
     /**
-     * shiro_role
+     * shiro_user
      */
     private static final long serialVersionUID = 1L;
 
@@ -61,32 +66,48 @@ public class RoleBean implements Serializable {
     }
 
     /**
-     * 角色名称
-     * @return name 角色名称
+     * 用户密码
+     * @return password_hash 用户密码
      */
-    public String getName() {
-        return name;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     /**
-     * 角色名称
-     * @param name 角色名称
+     * 用户密码
+     * @param passwordHash 用户密码
      */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash == null ? null : passwordHash.trim();
     }
 
     /**
-     * 
-     * @return is_del 
+     * 密码盐
+     * @return salt 密码盐
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * 密码盐
+     * @param salt 密码盐
+     */
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    /**
+     * 是否删除 1：删除
+     * @return is_del 是否删除 1：删除
      */
     public Integer getIsDel() {
         return isDel;
     }
 
     /**
-     * 
-     * @param isDel 
+     * 是否删除 1：删除
+     * @param isDel 是否删除 1：删除
      */
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;

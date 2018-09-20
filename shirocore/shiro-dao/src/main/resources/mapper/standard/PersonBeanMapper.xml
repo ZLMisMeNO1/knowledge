@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.i7baoz.knowledge.dao.mapper.RoleBeanMapper" >
-  <resultMap id="BaseResultMap" type="cn.i7baoz.model.standard.RoleBean" >
+<mapper namespace="cn.i7baoz.knowledge.dao.mapper.standard.PersonBeanMapper" >
+  <resultMap id="BaseResultMap" type="cn.i7baoz.knowledge.model.standard.PersonBean" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="identity" property="identity" jdbcType="BIGINT" />
     <result column="is_del" property="isDel" jdbcType="TINYINT" />
     <result column="created_by" property="createdBy" jdbcType="BIGINT" />
     <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
@@ -11,43 +14,69 @@
     <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, `name`, is_del, created_by, created_date, updated_by, updated_date
+    id, nick_name, code, user_id, `identity`, is_del, created_by, created_date, updated_by, 
+    updated_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from shiro_role
+    from shiro_person
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from shiro_role
+    delete from shiro_person
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="cn.i7baoz.model.standard.RoleBean" >
-    insert into shiro_role (id, `name`, is_del, 
+  <insert id="insert" parameterType="cn.i7baoz.knowledge.model.standard.PersonBean" >
+    insert into shiro_person (id, nick_name, code, 
+      user_id, `identity`, is_del, 
       created_by, created_date, updated_by, 
       updated_date)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, 
+    values (#{id,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{identity,jdbcType=BIGINT}, #{isDel,jdbcType=TINYINT}, 
       #{createdBy,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, 
       #{updatedDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="batchInsert" parameterType="java.util.List" >
-    insert into shiro_role (id, `name`, is_del, 
+    insert into shiro_person (id, nick_name, code, 
+      user_id, `identity`, is_del, 
       created_by, created_date, updated_by, 
       updated_date) values 
     <foreach collection="list" item="bean" index="index" separator="," >
-       (#{bean.id,jdbcType=BIGINT}, #{bean.name,jdbcType=VARCHAR}, #{bean.isDel,jdbcType=TINYINT}, 
+       (#{bean.id,jdbcType=BIGINT}, #{bean.nickName,jdbcType=VARCHAR}, #{bean.code,jdbcType=VARCHAR}, 
+        #{bean.userId,jdbcType=BIGINT}, #{bean.identity,jdbcType=BIGINT}, #{bean.isDel,jdbcType=TINYINT}, 
         #{bean.createdBy,jdbcType=BIGINT}, #{bean.createdDate,jdbcType=TIMESTAMP}, #{bean.updatedBy,jdbcType=BIGINT}, 
         #{bean.updatedDate,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <update id="batchUpdateChanged" parameterType="java.util.List" >
-    update shiro_role
+    update shiro_person
     <trim prefix="set" suffixOverrides="," >
-      <trim prefix="`name` =case" suffix="end," >
+      <trim prefix="nick_name =case" suffix="end," >
         <foreach collection="list" item="i" index="index" >
-          <if test="i.name!=null" >
-            when id = #{i.id,jdbcType=BIGINT} then #{i.name,jdbcType=VARCHAR}
+          <if test="i.nickName!=null" >
+            when id = #{i.id,jdbcType=BIGINT} then #{i.nickName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="code =case" suffix="end," >
+        <foreach collection="list" item="i" index="index" >
+          <if test="i.code!=null" >
+            when id = #{i.id,jdbcType=BIGINT} then #{i.code,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="user_id =case" suffix="end," >
+        <foreach collection="list" item="i" index="index" >
+          <if test="i.userId!=null" >
+            when id = #{i.id,jdbcType=BIGINT} then #{i.userId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`identity` =case" suffix="end," >
+        <foreach collection="list" item="i" index="index" >
+          <if test="i.identity!=null" >
+            when id = #{i.id,jdbcType=BIGINT} then #{i.identity,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
@@ -92,14 +121,23 @@
       id = #{i.id,jdbcType=BIGINT}
     </foreach>
   </update>
-  <insert id="insertSelective" parameterType="cn.i7baoz.model.standard.RoleBean" >
-    insert into shiro_role
+  <insert id="insertSelective" parameterType="cn.i7baoz.knowledge.model.standard.PersonBean" >
+    insert into shiro_person
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        `name`,
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="identity != null" >
+        `identity`,
       </if>
       <if test="isDel != null" >
         is_del,
@@ -121,8 +159,17 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=BIGINT},
       </if>
       <if test="isDel != null" >
         #{isDel,jdbcType=TINYINT},
@@ -141,11 +188,20 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.i7baoz.model.standard.RoleBean" >
-    update shiro_role
+  <update id="updateByPrimaryKeySelective" parameterType="cn.i7baoz.knowledge.model.standard.PersonBean" >
+    update shiro_person
     <set >
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="identity != null" >
+        `identity` = #{identity,jdbcType=BIGINT},
       </if>
       <if test="isDel != null" >
         is_del = #{isDel,jdbcType=TINYINT},
@@ -165,9 +221,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.i7baoz.model.standard.RoleBean" >
-    update shiro_role
-    set `name` = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="cn.i7baoz.knowledge.model.standard.PersonBean" >
+    update shiro_person
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      `identity` = #{identity,jdbcType=BIGINT},
       is_del = #{isDel,jdbcType=TINYINT},
       created_by = #{createdBy,jdbcType=BIGINT},
       created_date = #{createdDate,jdbcType=TIMESTAMP},

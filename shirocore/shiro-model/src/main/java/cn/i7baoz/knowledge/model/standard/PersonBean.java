@@ -1,28 +1,33 @@
-package cn.i7baoz.model.standard;
+package cn.i7baoz.knowledge.model.standard;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserBean implements Serializable {
+public class PersonBean implements Serializable {
     /**
      * id
      */
     private Long id;
 
     /**
-     * 用户名
+     * 昵称
      */
-    private String name;
+    private String nickName;
 
     /**
-     * 用户密码
+     * 人员编码，登录账号，is_del为0状态全表唯一
      */
-    private String password;
+    private String code;
 
     /**
-     * 密码盐
+     * 用户id
      */
-    private String salt;
+    private Long userId;
+
+    /**
+     * 身份 0：普通用户，1：普通管理员，2：超级管理员
+     */
+    private Long identity;
 
     /**
      * 
@@ -50,7 +55,7 @@ public class UserBean implements Serializable {
     private Date updatedDate;
 
     /**
-     * shiro_user
+     * shiro_person
      */
     private static final long serialVersionUID = 1L;
 
@@ -71,51 +76,67 @@ public class UserBean implements Serializable {
     }
 
     /**
-     * 用户名
-     * @return name 用户名
+     * 昵称
+     * @return nick_name 昵称
      */
-    public String getName() {
-        return name;
+    public String getNickName() {
+        return nickName;
     }
 
     /**
-     * 用户名
-     * @param name 用户名
+     * 昵称
+     * @param nickName 昵称
      */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     /**
-     * 用户密码
-     * @return password 用户密码
+     * 人员编码，登录账号，is_del为0状态全表唯一
+     * @return code 人员编码，登录账号，is_del为0状态全表唯一
      */
-    public String getPassword() {
-        return password;
+    public String getCode() {
+        return code;
     }
 
     /**
-     * 用户密码
-     * @param password 用户密码
+     * 人员编码，登录账号，is_del为0状态全表唯一
+     * @param code 人员编码，登录账号，is_del为0状态全表唯一
      */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
     }
 
     /**
-     * 密码盐
-     * @return salt 密码盐
+     * 用户id
+     * @return user_id 用户id
      */
-    public String getSalt() {
-        return salt;
+    public Long getUserId() {
+        return userId;
     }
 
     /**
-     * 密码盐
-     * @param salt 密码盐
+     * 用户id
+     * @param userId 用户id
      */
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * 身份 0：普通用户，1：普通管理员，2：超级管理员
+     * @return identity 身份 0：普通用户，1：普通管理员，2：超级管理员
+     */
+    public Long getIdentity() {
+        return identity;
+    }
+
+    /**
+     * 身份 0：普通用户，1：普通管理员，2：超级管理员
+     * @param identity 身份 0：普通用户，1：普通管理员，2：超级管理员
+     */
+    public void setIdentity(Long identity) {
+        this.identity = identity;
     }
 
     /**

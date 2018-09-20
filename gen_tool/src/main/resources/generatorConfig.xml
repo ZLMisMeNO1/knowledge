@@ -38,28 +38,28 @@
 
         <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
         <!-- targetProject:自动生成代码的位置 -->
-        <javaModelGenerator targetPackage="cn.i7baoz.model.standard" targetProject="E:\GitHub\knowledge\shiroweb\shiro-model\src\main\java">
+        <javaModelGenerator targetPackage="cn.i7baoz.knowledge.model.standard" targetProject="E:\GitHub\knowledge\shirocore\shiro-model\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!--对应的xml mapper文件 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="E:\GitHub\knowledge\shiroweb\shiro-dao\src\main\resources">
+        <sqlMapGenerator targetPackage="mapper.standard" targetProject="E:\GitHub\knowledge\shirocore\shiro-dao\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 对应的dao接口 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.i7baoz.dao.mapper" targetProject="E:\GitHub\knowledge\shiroweb\shiro-dao\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.i7baoz.knowledge.dao.mapper.standard" targetProject="E:\GitHub\knowledge\shirocore\shiro-dao\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="shiro_role" domainObjectName="RoleBean" enableCountByExample="false"
-                enableBatchInsert="true"
-                enableBatchUpdateChanged="true"
-                enableUpdateByExample="false"
-                enableDeleteByExample="false"
-                enableSelectByExample="false"
-                selectByExampleQueryId="false" />
+        <!--<table tableName="shiro_role" domainObjectName="RoleBean" enableCountByExample="false"-->
+                <!--enableBatchInsert="true"-->
+                <!--enableBatchUpdateChanged="true"-->
+                <!--enableUpdateByExample="false"-->
+                <!--enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false"-->
+                <!--selectByExampleQueryId="false" />-->
 
         <table tableName="shiro_user" domainObjectName="UserBean" enableCountByExample="false"
                enableBatchInsert="true"
@@ -68,5 +68,14 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false" />
+
+        <table tableName="shiro_person" domainObjectName="PersonBean" enableCountByExample="false"
+               enableBatchInsert="true"
+               enableBatchUpdateChanged="true"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" />
+
     </context>
 </generatorConfiguration>

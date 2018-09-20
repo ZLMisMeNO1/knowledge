@@ -1,9 +1,10 @@
 package cn.i7baoz.knowledge.resp;
 
-import lombok.Builder;
+import cn.i7baoz.knowledge.model.standard.PersonBean;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Title:
@@ -13,11 +14,11 @@ import java.io.Serializable;
  * @date:
  */
 @Data
-@Builder
 public class UserLoginResp implements Serializable {
 
     private Long userId;
-
-    private String username;
-
+    /**
+     * 身份列表
+     */
+    private List<PersonBean> identityList;
 }

@@ -1,4 +1,4 @@
-package cn.i7baoz.model.dto;
+package cn.i7baoz.knowledge.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

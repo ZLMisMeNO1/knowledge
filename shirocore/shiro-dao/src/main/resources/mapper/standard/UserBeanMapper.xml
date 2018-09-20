@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.i7baoz.knowledge.dao.mapper.UserBeanMapper" >
-  <resultMap id="BaseResultMap" type="cn.i7baoz.model.standard.UserBean" >
+<mapper namespace="cn.i7baoz.knowledge.dao.mapper.standard.UserBeanMapper" >
+  <resultMap id="BaseResultMap" type="cn.i7baoz.knowledge.model.standard.UserBean" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="password_hash" property="passwordHash" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="is_del" property="isDel" jdbcType="TINYINT" />
     <result column="created_by" property="createdBy" jdbcType="BIGINT" />
@@ -13,7 +12,7 @@
     <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, `name`, `password`, salt, is_del, created_by, created_date, updated_by, updated_date
+    id, password_hash, salt, is_del, created_by, created_date, updated_by, updated_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -25,42 +24,31 @@
     delete from shiro_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="cn.i7baoz.model.standard.UserBean" >
-    insert into shiro_user (id, `name`, `password`, 
-      salt, is_del, created_by, 
-      created_date, updated_by, updated_date
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, #{createdBy,jdbcType=BIGINT}, 
-      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="cn.i7baoz.knowledge.model.standard.UserBean" >
+    insert into shiro_user (id, password_hash, salt, 
+      is_del, created_by, created_date, 
+      updated_by, updated_date)
+    values (#{id,jdbcType=BIGINT}, #{passwordHash,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=TINYINT}, #{createdBy,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="batchInsert" parameterType="java.util.List" >
-    insert into shiro_user (id, `name`, `password`, 
-      salt, is_del, created_by, 
-      created_date, updated_by, updated_date
-      ) values 
+    insert into shiro_user (id, password_hash, salt, 
+      is_del, created_by, created_date, 
+      updated_by, updated_date) values 
     <foreach collection="list" item="bean" index="index" separator="," >
-       (#{bean.id,jdbcType=BIGINT}, #{bean.name,jdbcType=VARCHAR}, #{bean.password,jdbcType=VARCHAR}, 
-        #{bean.salt,jdbcType=VARCHAR}, #{bean.isDel,jdbcType=TINYINT}, #{bean.createdBy,jdbcType=BIGINT}, 
-        #{bean.createdDate,jdbcType=TIMESTAMP}, #{bean.updatedBy,jdbcType=BIGINT}, #{bean.updatedDate,jdbcType=TIMESTAMP}
-        )
+       (#{bean.id,jdbcType=BIGINT}, #{bean.passwordHash,jdbcType=VARCHAR}, #{bean.salt,jdbcType=VARCHAR}, 
+        #{bean.isDel,jdbcType=TINYINT}, #{bean.createdBy,jdbcType=BIGINT}, #{bean.createdDate,jdbcType=TIMESTAMP}, 
+        #{bean.updatedBy,jdbcType=BIGINT}, #{bean.updatedDate,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <update id="batchUpdateChanged" parameterType="java.util.List" >
     update shiro_user
     <trim prefix="set" suffixOverrides="," >
-      <trim prefix="`name` =case" suffix="end," >
+      <trim prefix="password_hash =case" suffix="end," >
         <foreach collection="list" item="i" index="index" >
-          <if test="i.name!=null" >
-            when id = #{i.id,jdbcType=BIGINT} then #{i.name,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`password` =case" suffix="end," >
-        <foreach collection="list" item="i" index="index" >
-          <if test="i.password!=null" >
-            when id = #{i.id,jdbcType=BIGINT} then #{i.password,jdbcType=VARCHAR}
+          <if test="i.passwordHash!=null" >
+            when id = #{i.id,jdbcType=BIGINT} then #{i.passwordHash,jdbcType=VARCHAR}
           </if>
         </foreach>
       </trim>
@@ -112,17 +100,14 @@
       id = #{i.id,jdbcType=BIGINT}
     </foreach>
   </update>
-  <insert id="insertSelective" parameterType="cn.i7baoz.model.standard.UserBean" >
+  <insert id="insertSelective" parameterType="cn.i7baoz.knowledge.model.standard.UserBean" >
     insert into shiro_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        `name`,
-      </if>
-      <if test="password != null" >
-        `password`,
+      <if test="passwordHash != null" >
+        password_hash,
       </if>
       <if test="salt != null" >
         salt,
@@ -147,11 +132,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="passwordHash != null" >
+        #{passwordHash,jdbcType=VARCHAR},
       </if>
       <if test="salt != null" >
         #{salt,jdbcType=VARCHAR},
@@ -173,14 +155,11 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.i7baoz.model.standard.UserBean" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.i7baoz.knowledge.model.standard.UserBean" >
     update shiro_user
     <set >
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        `password` = #{password,jdbcType=VARCHAR},
+      <if test="passwordHash != null" >
+        password_hash = #{passwordHash,jdbcType=VARCHAR},
       </if>
       <if test="salt != null" >
         salt = #{salt,jdbcType=VARCHAR},
@@ -203,10 +182,9 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.i7baoz.model.standard.UserBean" >
+  <update id="updateByPrimaryKey" parameterType="cn.i7baoz.knowledge.model.standard.UserBean" >
     update shiro_user
-    set `name` = #{name,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
+    set password_hash = #{passwordHash,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=TINYINT},
       created_by = #{createdBy,jdbcType=BIGINT},

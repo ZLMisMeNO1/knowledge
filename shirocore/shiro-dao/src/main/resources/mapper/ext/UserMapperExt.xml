@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.i7baoz.knowledge.dao.mapper.ext.UserMapperExt">
+    <resultMap id="BaseResultMap" type="cn.i7baoz.knowledge.model.standard.UserBean" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="password_hash" property="passwordHash" jdbcType="VARCHAR" />
+        <result column="salt" property="salt" jdbcType="VARCHAR" />
+        <result column="is_del" property="isDel" jdbcType="TINYINT" />
+        <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, password_hash, salt, is_del, created_by, created_date, updated_by, updated_date
+    </sql>
+    <select id="findUserByCode" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        u.id,
+        u.`password_hash`,
+        u.`salt`,
+        u.`is_del`,
+        u.`created_by`,
+        u.`created_date`,
+        u.`updated_by`,
+        u.`updated_date`
+        FROM
+        shiro_user u
+        LEFT JOIN shiro_person p
+        ON u.`id` = p.`user_id`
+        WHERE p.`is_del` = 0
+        AND p.`code` = #{code}
+        AND u.`is_del` = 0
+        LIMIT 1
+    </select>
+</mapper>

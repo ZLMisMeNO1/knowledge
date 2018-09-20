@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.i7baoz.knowledge.dao.mapper.ext.PersonMapperExt">
+
+    <resultMap id="BaseResultMap" type="cn.i7baoz.knowledge.model.standard.PersonBean" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="identity" property="identity" jdbcType="BIGINT" />
+        <result column="is_del" property="isDel" jdbcType="TINYINT" />
+        <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        p.id as id , p.nick_name as nick_name , p.code as code , p.user_id as user_id , p.`identity` as identity , p.is_del as is_del ,
+        p.created_by as created_by , p.created_date as created_date, p.updated_by as updated_by,
+        p.updated_date as updated_date
+    </sql>
+    <select id="findPersonListByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        shiro_person p
+        LEFT JOIN shiro_user u
+        ON p.`user_id` = u.`id`
+        WHERE p.`is_del` = 0
+        AND u.`is_del` = 0
+        AND p.`user_id` = #{userId}
+    </select>
+</mapper>

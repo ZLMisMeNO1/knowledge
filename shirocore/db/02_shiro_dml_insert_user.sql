@@ -1,0 +1,2 @@
+delete from shiro_user where id = 1;
+insert into shiro_user (id,password_hash,salt,is_del,created_by,created_date,updated_by,updated_date) values(1,'837505b8d33af448d095e017bbf24eaa','98e53b0950414cdea563e8dc678631c3',0,0,now(),0,now());
