@@ -24,12 +24,12 @@
         <property name="filterChainDefinitions">
             <value>
                 /s/authc/toLogin = anon
-                /** = authc
+                /** = permAuthc
             </value>
         </property>
 
     </bean>
-
+    <bean id="permAuthc" class="cn.i7baoz.knowledge.shiro.filter.PermFilter"/>
     <util:list id="realms">
         <ref bean="usernamePasswordRealm"/>
     </util:list>

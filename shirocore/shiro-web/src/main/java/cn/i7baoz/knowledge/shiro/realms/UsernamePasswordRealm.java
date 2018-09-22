@@ -1,7 +1,8 @@
 package cn.i7baoz.knowledge.shiro.realms;
 
+import cn.i7baoz.knowledge.exception.KnowledgeException;
+import cn.i7baoz.knowledge.exception.KnowledgeMessageEnum;
 import cn.i7baoz.knowledge.model.dto.LoginUserPersonDto;
-import cn.i7baoz.knowledge.model.standard.UserBean;
 import cn.i7baoz.knowledge.service.UserService;
 import cn.i7baoz.knowledge.shiro.matcher.Md5PasswordMatcher;
 import org.apache.shiro.authc.*;
@@ -48,11 +49,11 @@ public class UsernamePasswordRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
         if (Objects.isNull(token.getPrincipal())) {
-            throw new UnknownAccountException("无法获取用户名");
+            throw new KnowledgeException(KnowledgeMessageEnum.UNKNOWN_ACCOUNT);
         }
         LoginUserPersonDto personDetail = userService.getPersonDetail((String) token.getPrincipal());
         if (personDetail == null) {
-            throw new UnknownAccountException("用户名错误");
+            throw new UnknownAccountException();
         }
 
         return new SimpleAuthenticationInfo(personDetail, token.getCredentials(), getName());

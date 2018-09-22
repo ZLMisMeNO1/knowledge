@@ -1,5 +1,7 @@
 package cn.i7baoz.knowledge.web;
 
+import cn.i7baoz.knowledge.exception.KnowledgeException;
+import cn.i7baoz.knowledge.exception.KnowledgeMessageEnum;
 import cn.i7baoz.knowledge.model.dto.LoginUserPersonDto;
 import cn.i7baoz.knowledge.resp.UserLoginResp;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +10,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/s/authc")
 public class UserLoginController {
 
+    @GetMapping("/logout")
+    public void logout(){
+        SecurityUtils.getSubject().logout();
+    }
+
     @PostMapping("/toLogin")
     public UserLoginResp tologin(HttpServletRequest request, String username, String password, Boolean rememberMe) {
 
@@ -35,14 +43,11 @@ public class UserLoginController {
         try {
             SecurityUtils.getSubject().login(token);
         } catch (UnknownAccountException e) {
-            log.info(e.getMessage());
-            throw e;
+            throw new KnowledgeException(KnowledgeMessageEnum.UNKNOWN_ACCOUNT);
         } catch (IncorrectCredentialsException e) {
-            log.info("密码错误");
-            throw e;
-        } catch (Exception e) {
-            log.info("系统错误:{}",e.getMessage());
-            throw e;
+            throw new KnowledgeException(KnowledgeMessageEnum.INVALIDE_CRED);
+        }catch (Exception e) {
+            throw new KnowledgeException(KnowledgeMessageEnum.SYSTEM_ERROR);
         }
         LoginUserPersonDto dto = (LoginUserPersonDto) SecurityUtils.getSubject().getPrincipal();
         UserLoginResp resp = new UserLoginResp();

@@ -1,13 +1,5 @@
-layui.use(['layer', 'form', 'element'], function(){
-    var layer = layui.layer
-    ,form = layui.form
-    ,element = layui.element
-   
-    //……
-    //你的代码都应该写在这里面
-  });
-
-  $(function(){
+var layer = layui.layer;
+$(function(){
     function n(n, e, t) {
         return n.getAttribute(e) || t
     }
@@ -85,4 +77,67 @@ layui.use(['layer', 'form', 'element'], function(){
         i()
     },
     100)
-  });
+});
+
+
+/**
+ * 封装$.ajax方法请求后台数据
+ * @param {*} url 请求地址
+ * @param {*} data 请求参数
+ * @param {*} async 是否异步
+ * @param {*} method 请求方式
+ * @param {*} success 成功调用的方法
+ * @param {*} error 失败调用的方法 
+ */
+function exec(url,data,async,method,success,error) {
+    if(!error) {
+        error = function(){
+            layer.msg("系统错误");
+        }
+    }
+    if (!method) {
+        method = 'POST';
+    }
+    if (!success) {
+        success = function(data){
+            console.log(data);
+        }
+    }
+    $.ajax({
+        url : url,
+        method : method,
+        data : data,
+        async : async,
+        success : function(data){
+            if(!$.isEmptyObject(data)) {
+                data = JSON.parse(data);
+            }
+            //未登录
+            if( data.code == 201) {
+                layer.open({
+                    id : 'login',
+                    title : '用户登录',
+                    content : '/w/authc/login.html',
+                    type : 2,
+                    area : ['480px','300px'],
+                    resize :false,  
+                    end : function(){
+                        exec('/s/user/getPersonDetail',{},false,'post',function(data){
+                            console.log(data);
+                            $('#username').text(data.body.nickName);
+                        });
+                    }
+                });
+                return;
+            }
+            //出错
+            if( data.code != 200) {
+                layer.msg(data.message);
+                return;
+            }
+            
+            success(data);
+        },
+        error :error
+    });
+}
