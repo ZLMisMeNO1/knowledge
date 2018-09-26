@@ -27,6 +27,14 @@
 
     </mvc:annotation-driven>
 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <property name="prefix" value="/WEB-INF/oauth/" />
+        <property name="suffix" value=".jsp" />
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/> &lt;!&ndash; 不能用jstl的那个 &ndash;&gt;-->
+        <!--<property name="contentType" value="text/html;charset=UTF-8"/>-->
+        <!--<property name="order" value="0"></property>-->
+    </bean>
 
 
     <!-- 设置使用注解的类所在的jar包 -->

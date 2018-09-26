@@ -6,24 +6,24 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class StartServer {
 
     public static void main(String[] args) {
-    //      服务器的监听端口
-    Server server = new Server(8002);
-    // 关联一个已经存在的上下文
-    WebAppContext context = new WebAppContext();
-    // 设置描述符位置
+        //      服务器的监听端口
+        Server server = new Server(8002);
+        // 关联一个已经存在的上下文
+        WebAppContext context = new WebAppContext();
+        // 设置描述符位置
         context.setDescriptor("./shirocore/shiro-web/src/main/webapp/WEB-INF/web.xml");
-    // 设置Web内容上下文路径
+        // 设置Web内容上下文路径
         context.setResourceBase("./shiro-web/src/main/webapp");
-    // 设置上下文路径
+        // 设置上下文路径
         context.setContextPath("/");
         context.setParentLoaderPriority(true);
         server.setHandler(context);
 
         try {
-        server.start();
-        log.info("地址 -> http://localhost:8002/");
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+            server.start();
+            log.info("地址 -> http://localhost:8002/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

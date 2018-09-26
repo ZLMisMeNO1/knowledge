@@ -20,7 +20,7 @@
     </modules>
     <packaging>pom</packaging>
 
-    <name>shiroweb Maven Webapp</name>
+    <name>shirocore Maven Webapp</name>
     <url>http://blog.i7baoz.cn</url>
 
     <properties>
@@ -30,6 +30,19 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.apache.oltu.oauth2</groupId>
+            <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.oltu.oauth2</groupId>
+            <artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -47,7 +60,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
         </dependency>
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -79,10 +97,11 @@
             <groupId>org.eclipse.jetty.toolchain</groupId>
             <artifactId>jetty-schemas</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jsp</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.jetty</groupId>-->
+            <!--<artifactId>jetty-jsp</artifactId>-->
+        <!--</dependency>-->
+
         <!-- slf4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -149,4 +168,22 @@
             <artifactId>spring-jdbc</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <!-- 配置Tomcat插件 ,用于启动项目 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <!--如果不设置，则默认为猫的自定义端口，项目路径为http://localhost:默认端口/项目名  -->
+                <configuration>
+                    <!--如果端口号改为8081：那么访问的时候路径的端口就要写成8081，否则404  -->
+                    <port>8080</port>
+                    <!-- 如果设置为/，则项目了路径为http://localhost:端口号 /-->
+                    <!-- 如果设置为/123，则项目了路径为http://localhost:端口号/123 -->
+                    <path>/123</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
