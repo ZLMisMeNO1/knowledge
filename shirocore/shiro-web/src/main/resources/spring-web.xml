@@ -40,4 +40,5 @@
     <!-- 设置使用注解的类所在的jar包 -->
     <context:component-scan base-package="cn.i7baoz.knowledge"/>
 
+
 </beans>

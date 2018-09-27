@@ -15,7 +15,7 @@
     <groupId>cn.i7baoz.www</groupId>
     <artifactId>id-generator</artifactId>
     <version>1.0.0.id_generator</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>id-generator Maven Webapp</name>
     <url>http://blog.i7baoz.cn</url>

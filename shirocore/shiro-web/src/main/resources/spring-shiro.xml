@@ -24,7 +24,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /s/authc/toLogin = anon
-                /toLogin = anon
+                /authorize = anon
                 /** = permAuthc
             </value>
         </property>
